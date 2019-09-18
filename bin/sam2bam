@@ -1,0 +1,13 @@
+#!/bin/bash
+# author: Kevin Lamkiewicz
+set -e
+
+if [ ! -f "$1" ]; then
+  2&> echo 'Error: Please provide a .sam file.'
+  exit 1
+fi
+
+SAM="$1"
+BN=${SAM%.*}
+samtools view -bhF4 "$1" | samtools sort > "$BN".bam
+samtools index "$BN".bam

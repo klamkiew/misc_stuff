@@ -1,0 +1,25 @@
+#!/bin/bash
+# author: Kevin Lamkiewicz
+
+if [ $# == 0 ]; then
+    T=(*.tex)
+    if [ "${T[0]}" == "*.tex" ]; then
+        >&2 echo 'Error: No .tex files here!'
+        exit 1
+    fi
+else
+    T=("${1%.*}.tex")
+    if [ ! -f "$T" ]; then
+        >&2 echo "Error: No file named $T here!" 
+        exit 2
+    fi
+fi
+
+for F in ${T[@]}; do
+    B=${F%.*}
+    pdflatex "$B"
+    if [ -f "${B}.aux" ]; then
+        bibtex "$B" && pdflatex "$B"
+    fi
+    pdflatex "$B"
+done
