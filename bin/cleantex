@@ -2,7 +2,7 @@
 # author: Kevin Lamkiewicz
 
 if [ ! -f "$1" ]; then
-  2&> echo 'Error: Please provide a tex file. I will remove everything except .tex and .pdf'
+  >&2 echo 'Error: Please provide a tex file. I will remove everything except .tex and .pdf'
   exit 1
 fi
 
@@ -10,6 +10,6 @@ TEX=$1
 BN=${TEX%.*}
 DIR=$(dirname "$1")
 
-ls "$DIR" | grep -v '.tex' | grep -v '.pdf' | xargs rm
+#ls "$DIR" | grep -v '.tex' | grep -v '.pdf' | xargs rm
 
-#rm "$BN".log "$BN".aux "$BN".bbl "$BN".blg "$BN".spl "$BN".out "$BN".synctex.gz "$BN".nav "$BN".vrb "$BN".snm "$BN".fls "$BN".toc "$BN".fdb_latexmk 2>/dev/null 
+rm "$BN".log "$BN".aux "$BN".bbl "$BN".blg "$BN".spl "$BN".out "$BN".synctex.gz "$BN".nav "$BN".vrb "$BN".snm "$BN".fls "$BN".toc "$BN".fdb_latexmk "$BN"-pics.pdf "$BN"-autopp.vrb "$BN"-autopp.log 2>/dev/null 
