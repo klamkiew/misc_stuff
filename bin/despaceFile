@@ -4,6 +4,7 @@
 if [ $# -gt 1 ]; then
   2&> echo "Error: I just need a directory to work with. Or nothing at all - I'll free your current directory from spaces in that case"
   exit 1
+fi
 
 if [ -d "$1" ]; then
   DIR="$1"
@@ -12,3 +13,4 @@ else
 fi
 
 find "$DIR" -name "* *" | rename 's/ /_/g'
+
