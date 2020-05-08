@@ -2,7 +2,7 @@
 # author: Kevin Lamkiewicz
 
 if [ ! -f "$1" ]; then
-  2&> echo 'Error: Please provide a file with windows newline characters.'
+   &>2 echo 'Error: Please provide a file with windows newline characters.' 
   exit 1
 fi
 
