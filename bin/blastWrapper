@@ -1,0 +1,22 @@
+#!/bin/bash 
+# author: Kevin Lamkiewicz
+
+if [ $# -lt 3 ]; then
+  echo "ERROR! I need at least three parameters."
+  echo "USAGE:"
+  echo "blastWrapper <TASK> <QUERY> <DB> [OPTIONS]..."
+  exit 1
+fi
+
+OUTPUTFMT='6 qseqid sseqid pident length mismatch gapopen qstart qend qlen sstart send slen evalue bitscore'
+
+TASK="$1"
+QUERY="$2"
+DB="$3"
+
+if [ ! $# -gt 3 ]; then
+  "$TASK" -task "$TASK" -outfmt "$OUTPUTFMT" -query "$QUERY" -db "$DB"
+else
+  shift 3
+  "$TASK" -task "$TASK" -outfmt "$OUTPUTFMT" -query "$QUERY" -db "$DB" "$@"
+fi
